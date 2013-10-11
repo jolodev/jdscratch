@@ -10,10 +10,18 @@ QMAKE_CXXFLAGS += -Werror -Wall
 
 # Input
 SOURCES += src/main.cxx \
-    src/MainWindow.cxx
+    src/MainWindow.cxx \
+    src/obj/AbstractObject.cxx \
+    src/obj/Object.cxx \
+    src/core/OMTools.cxx
 
 HEADERS += \
-    src/MainWindow.hxx
+    src/MainWindow.hxx \
+    src/obj/AbstractObject.hxx \
+    src/core/Types.hxx \
+    src/obj/Object.hxx \
+    src/core/OMTools.hxx \
+    src/obj/AbstractObjectFwd.hxx
 
 OTHER_FILES += \
     android/version.xml \

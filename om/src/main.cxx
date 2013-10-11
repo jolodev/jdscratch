@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
     auto w = new MainWindow();
 
     QObject::connect(app, &QApplication::lastWindowClosed, app, &QApplication::quit);
-    w->show();
+    w->showMaximized();
 
     return app->exec();
 }

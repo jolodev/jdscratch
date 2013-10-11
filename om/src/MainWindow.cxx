@@ -5,6 +5,8 @@
 #include <QPushButton>
 #include <QApplication>
 
+#include <obj/Object.hxx>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -34,6 +36,10 @@ MainWindow::~MainWindow()
 void MainWindow::run()
 {
     m_browser->clear();
+
+    auto o = AbstractObject::createObject<Object>();
+    log(o->toString());
+
     log("running...");
 }
 
