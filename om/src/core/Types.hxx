@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <map>
+#include <cassert>
 
 #include <QString>
 #include <QUuid>

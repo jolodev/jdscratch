@@ -13,7 +13,10 @@ SOURCES += src/main.cxx \
     src/MainWindow.cxx \
     src/obj/AbstractObject.cxx \
     src/obj/Object.cxx \
-    src/core/OMTools.cxx
+    src/core/OMTools.cxx \
+    src/obj/AbstractProperty.cxx \
+    src/core/qiostream.cxx \
+    src/obj/TestNode.cxx
 
 HEADERS += \
     src/MainWindow.hxx \
@@ -21,7 +24,13 @@ HEADERS += \
     src/core/Types.hxx \
     src/obj/Object.hxx \
     src/core/OMTools.hxx \
-    src/obj/AbstractObjectFwd.hxx
+    src/obj/AbstractObjectFwd.hxx \
+    src/obj/AbstractProperty.hxx \
+    src/obj/AbstractPropertyFwd.hxx \
+    src/obj/Property.hxx \
+    src/core/qiostream.hxx \
+    src/obj/ObjectFormatter.hxx \
+    src/obj/TestNode.hxx
 
 OTHER_FILES += \
     android/version.xml \

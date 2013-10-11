@@ -5,7 +5,8 @@
 #include <QPushButton>
 #include <QApplication>
 
-#include <obj/Object.hxx>
+#include <obj/TestNode.hxx>
+#include <obj/ObjectFormatter.hxx>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -37,8 +38,9 @@ void MainWindow::run()
 {
     m_browser->clear();
 
-    auto o = AbstractObject::createObject<Object>();
-    log(o->toString());
+    auto o = AbstractObject::createObject<TestNode>();
+
+    log(ObjectFormatter<TestNode>::format(o));
 
     log("running...");
 }

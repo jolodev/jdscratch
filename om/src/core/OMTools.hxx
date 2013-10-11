@@ -2,6 +2,7 @@
 #define OMTOOLS_HXX
 
 #include <core/Types.hxx>
+#include <core/qiostream.hxx>
 
 class OMTools {
 public:

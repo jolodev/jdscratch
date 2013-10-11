@@ -6,15 +6,21 @@
 class Object : public AbstractObject
 {
 public:
+    static QString idPropertyName();
+
     explicit Object(const QUuid& id = OMTools::invalidId());
     virtual ~Object();
 
 protected:
     QString implToString() const override;
     QUuid implId() const override;
+    void implRegisterProperty(AbstractPropertySP p) override;
+    AbstractPropertySP implProperty(const QString &name) const override;
+    const AbstractPropertySPV implProperties() const override;
 
 private:
-    QUuid m_id { OMTools::invalidId() };
+    AbstractPropertySPV m_propertyV;
+    AbstractPropertySPM m_propertyM;
 };
 
 #endif // OBJECT_HXX
