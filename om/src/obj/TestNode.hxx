@@ -7,6 +7,7 @@ class TestNode : public Object
 {
 public:
     static QString singular();
+    static QString plural();
 
     explicit TestNode(const QUuid& id);
     virtual ~TestNode();

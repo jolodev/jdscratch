@@ -8,6 +8,11 @@
 #include <obj/TestNode.hxx>
 #include <obj/ObjectFormatter.hxx>
 
+#include <db/Database.hxx>
+#include <orm/Mapper.hxx>
+#include <orm/DbGen.hxx>
+#include <orm/PgDialect.hxx>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -20,11 +25,13 @@ MainWindow::MainWindow(QWidget *parent) :
     m_quit = new QPushButton(tr("&Quit"), w);
     connect(m_quit, &QPushButton::clicked, qApp, &QApplication::quit);
 
-    m_browser = new QTextBrowser(w);
+    m_log = new QTextBrowser(w);
+    m_sql = new QTextBrowser(w);
 
     w->layout()->addWidget(m_quit);
     w->layout()->addWidget(m_run);
-    w->layout()->addWidget(m_browser);
+    w->layout()->addWidget(m_sql);
+    w->layout()->addWidget(m_log);
 
     setCentralWidget(w);
 
@@ -36,15 +43,24 @@ MainWindow::~MainWindow()
 
 void MainWindow::run()
 {
-    m_browser->clear();
+    auto db = Database("demo");
+
+    m_log->clear();
+    m_sql->clear();
 
     auto o = AbstractObject::createObject<TestNode>();
+    log(ObjectFormatter<TestNode>::format(o), m_log);
 
-    log(ObjectFormatter<TestNode>::format(o));
+    Mapper::instance()->createDataTableIn<TestNode>(&db);
 
-    log("running...");
+    auto dbgen = DbGen<PgDialect>();
+
+    for (auto cmd : dbgen.create(&db)) {
+        log(cmd, m_sql);
+    }
+
 }
 
-void MainWindow::log(const QString& msg) {
-    m_browser->append(msg);
+void MainWindow::log(const QString& msg, QTextBrowser *where) {
+    where->append(msg);
 }

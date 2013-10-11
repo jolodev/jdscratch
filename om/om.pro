@@ -6,7 +6,7 @@ CONFIG += c++11
 QT += widgets gui
 
 QMAKE_CXXFLAGS += -Werror -Wall
-#QMAKE_CXX = clang++
+QMAKE_CXX = clang++
 
 # Input
 SOURCES += src/main.cxx \
@@ -16,7 +16,17 @@ SOURCES += src/main.cxx \
     src/core/OMTools.cxx \
     src/obj/AbstractProperty.cxx \
     src/core/qiostream.cxx \
-    src/obj/TestNode.cxx
+    src/obj/TestNode.cxx \
+    src/db/AbstractDbNode.cxx \
+    src/db/Database.cxx \
+    src/db/InDatabaseNode.cxx \
+    src/db/Schema.cxx \
+    src/db/InSchemaNode.cxx \
+    src/db/Table.cxx \
+    src/orm/Mapper.cxx \
+    src/orm/AbstractDbGen.cxx \
+    src/orm/AbstractDatabaseDialect.cxx \
+    src/orm/PgDialect.cxx
 
 HEADERS += \
     src/MainWindow.hxx \
@@ -30,7 +40,23 @@ HEADERS += \
     src/obj/Property.hxx \
     src/core/qiostream.hxx \
     src/obj/ObjectFormatter.hxx \
-    src/obj/TestNode.hxx
+    src/obj/TestNode.hxx \
+    src/db/AbstractDbNode.hxx \
+    src/db/Database.hxx \
+    src/db/InDatabaseNode.hxx \
+    src/db/Schema.hxx \
+    src/db/InSchemaNode.hxx \
+    src/db/Table.hxx \
+    src/orm/Mapper.hxx \
+    src/db/TableFwd.hxx \
+    src/db/AbstractDbNodeFwd.hxx \
+    src/orm/AbstractDbGen.hxx \
+    src/orm/DbGen.hxx \
+    src/orm/AbstractDatabaseDialect.hxx \
+    src/orm/PgDialect.hxx \
+    src/db/DatabaseFwd.hxx \
+    src/db/SchemaFwd.hxx \
+    src/db/TableFwd.hxx
 
 OTHER_FILES += \
     android/version.xml \

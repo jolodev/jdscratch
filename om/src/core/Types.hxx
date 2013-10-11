@@ -10,4 +10,6 @@
 #include <QUuid>
 #include <QStringList>
 
+typedef std::vector<QUuid> QUuidV;
+
 #endif // TYPES_HXX

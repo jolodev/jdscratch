@@ -18,10 +18,12 @@ signals:
 public slots:
     void run();
 
-    void log(const QString& msg);
+    void log(const QString& msg, QTextBrowser* where);
 
 private:
-    QTextBrowser* m_browser;
+    QTextBrowser* m_log;
+    QTextBrowser* m_sql;
+
     QPushButton* m_run;
     QPushButton* m_quit;
 };
