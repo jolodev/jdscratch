@@ -5,10 +5,35 @@ QString Object::idPropertyName()
     return "ID";
 }
 
+QString Object::versionPropertyName()
+{
+    return "Object Version";
+}
+
+QString Object::creationTimestampName()
+{
+    return "Created";
+}
+
+QString Object::lastModificationTimestampName()
+{
+    return "Modified";
+}
+
 Object::Object(const QUuid &id)
     : AbstractObject()
 {
-    (void) createProperty<QUuid>(Object::idPropertyName(), id);
+    auto idP = createProperty<QUuid>(Object::idPropertyName(), id, true, false);
+    idP->addRole(PropertyRole::PrimaryKey);
+
+    auto version = createProperty<qulonglong>(Object::versionPropertyName(), 0, true, true);
+    version->addRole(PropertyRole::Version);
+
+    auto creat = createProperty<QDateTime>(Object::creationTimestampName(), QDateTime::currentDateTime(), true, true);
+    creat->addRole(PropertyRole::Creation);
+
+    auto mod = createProperty<QDateTime>(Object::lastModificationTimestampName(), QDateTime::currentDateTime(), true, true);
+    mod->addRole(PropertyRole::LastModification);
 }
 
 Object::~Object()

@@ -9,7 +9,7 @@ public:
     static QString singular();
     static QString plural();
 
-    explicit TestNode(const QUuid& id);
+    explicit TestNode(const QUuid& id = OMTools::invalidId());
     virtual ~TestNode();
 };
 

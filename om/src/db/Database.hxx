@@ -10,6 +10,7 @@ class Database : public AbstractDbNode
 {
 public:
     static QString dataSchemaName();
+    static QString auditSchemaName();
 
     explicit Database(const QString& name);
     virtual ~Database();

@@ -9,6 +9,11 @@ AbstractDatabaseDialect::~AbstractDatabaseDialect()
 
 }
 
+void AbstractDatabaseDialect::drop(SchemaSP s, QStringList &buf) const
+{
+    implDrop(s, buf)   ;
+}
+
 void AbstractDatabaseDialect::create(SchemaSP s, QStringList &buf) const
 {
     implCreate(s, buf);

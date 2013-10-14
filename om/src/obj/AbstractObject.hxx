@@ -24,8 +24,8 @@ public:
     }
 
     template<typename ValueT>
-    std::shared_ptr<Property<ValueT> > createProperty(const QString& name, const ValueT& value) {
-        auto p = std::make_shared<Property<ValueT> >(Property<ValueT>(name, value));
+    std::shared_ptr<Property<ValueT> > createProperty(const QString& name, const ValueT& value, bool isMandatory = false, bool useValueAsStorageDefault=false) {
+        auto p = std::make_shared<Property<ValueT> >(Property<ValueT>(name, value, isMandatory, useValueAsStorageDefault));
         registerProperty(p);
         return p;
     }

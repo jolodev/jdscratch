@@ -7,10 +7,16 @@ QString Database::dataSchemaName()
     return "DTA";
 }
 
+QString Database::auditSchemaName()
+{
+    return "AUDIT";
+}
+
 Database::Database(const QString& n)
     : AbstractDbNode(), m_name(n)
 {
     (void) create<Schema, Database>(this, Database::dataSchemaName());
+    (void) create<Schema, Database>(this, Database::auditSchemaName());
 }
 
 Database::~Database()

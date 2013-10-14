@@ -20,7 +20,12 @@ protected:
         assert(nullptr != db);
 
         auto buf = QStringList();
-        buf.append(comment(QObject::tr("Creating for dialect: %1").arg(Dialect::name())));
+        //buf.append(comment(QObject::tr("Creating for dialect: %1").arg(Dialect::name())));
+
+        // drop existing schema
+        for (auto s : db->nodes<Schema>()) {
+            m_d->drop(s, buf);
+        }
 
         // create schemata
         for (auto s : db->nodes<Schema>()) {

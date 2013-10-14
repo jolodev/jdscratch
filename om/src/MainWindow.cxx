@@ -4,6 +4,9 @@
 #include <QTextBrowser>
 #include <QPushButton>
 #include <QApplication>
+#include <QMessageBox>
+
+#include <core/DatabaseConnectionData.hxx>
 
 #include <obj/TestNode.hxx>
 #include <obj/ObjectFormatter.hxx>
@@ -12,6 +15,17 @@
 #include <orm/Mapper.hxx>
 #include <orm/DbGen.hxx>
 #include <orm/PgDialect.hxx>
+
+#include <pgconn/PgConn.hxx>
+
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+
+QString MainWindow::dbName()
+{
+    return "demo";
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -35,6 +49,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setCentralWidget(w);
 
+    connect(PgConn::instance(), &PgConn::ready, this, &MainWindow::onDatabaseReady);
+    connect(PgConn::instance(), &PgConn::queryError, this, &MainWindow::onDatabaseError);
+    connect(PgConn::instance(), &PgConn::transactionError, this, &MainWindow::onDatabaseError);
+    connect(PgConn::instance(), &PgConn::executed, this, &MainWindow::dbLog);
+    connect(PgConn::instance(), &PgConn::logRequest, this, &MainWindow::dbLog);
     run();
 }
 
@@ -43,24 +62,57 @@ MainWindow::~MainWindow()
 
 void MainWindow::run()
 {
-    auto db = Database("demo");
-
     m_log->clear();
     m_sql->clear();
 
+/*
     auto o = AbstractObject::createObject<TestNode>();
     log(ObjectFormatter<TestNode>::format(o), m_log);
+*/
 
-    Mapper::instance()->createDataTableIn<TestNode>(&db);
+    log(tr("Opening Database..."), m_log);
+    PgConn::instance()->open(DatabaseConnectionData());
+}
+
+void MainWindow::onDatabaseReady()
+{
+    auto dbModel = Database(MainWindow::dbName());
+
+    Mapper::instance()->createDataTableIn<TestNode>(&dbModel);
 
     auto dbgen = DbGen<PgDialect>();
 
-    for (auto cmd : dbgen.create(&db)) {
-        log(cmd, m_sql);
+    log(tr("Database connected."), m_log);
+
+    if (!PgConn::instance()->begin()) {
+        QMessageBox::critical(this, tr("Transaction error"), tr("Failed to start transaction: %1").arg(PgConn::instance()->lastError().text()));
+        return;
     }
 
+    PgConn::instance()->exec(dbgen.create(&dbModel));
+
+    if (!PgConn::instance()->begin()) {
+        QMessageBox::critical(this, tr("Transaction error"), tr("Failed to commit transaction: %1").arg(PgConn::instance()->lastError().text()));
+        return;
+    }
+
+
+    log(tr("Schema ready."), m_log);
+}
+
+void MainWindow::onDatabaseError(const QSqlError &e)
+{
+    QMessageBox::critical(this, tr("Database Error"), e.text());
+
+    log(tr("Error: %1").arg(e.text()), m_log)   ;
 }
 
 void MainWindow::log(const QString& msg, QTextBrowser *where) {
     where->append(msg);
 }
+
+void MainWindow::dbLog(const QString &sql)
+{
+    log(tr("Executed: %1").arg(sql), m_log);
+}
+

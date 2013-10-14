@@ -9,6 +9,7 @@
 #include <QString>
 #include <QUuid>
 #include <QStringList>
+#include <QDateTime>
 
 typedef std::vector<QUuid> QUuidV;
 

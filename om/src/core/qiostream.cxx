@@ -25,3 +25,10 @@ std::ostream &operator<<(std::ostream &strm, const QUuidV &v)
     strm << "[" << l.join(", ") << "]";
     return strm;
 }
+
+
+std::ostream &operator<<(std::ostream &strm, const QDateTime &v)
+{
+    strm << v.toString(Qt::ISODate);
+    return strm;
+}

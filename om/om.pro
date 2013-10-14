@@ -3,7 +3,7 @@ TARGET = om
 INCLUDEPATH += .
 INCLUDEPATH += ./src
 CONFIG += c++11
-QT += widgets gui
+QT += widgets gui sql
 
 QMAKE_CXXFLAGS += -Werror -Wall
 QMAKE_CXX = clang++
@@ -26,7 +26,12 @@ SOURCES += src/main.cxx \
     src/orm/Mapper.cxx \
     src/orm/AbstractDbGen.cxx \
     src/orm/AbstractDatabaseDialect.cxx \
-    src/orm/PgDialect.cxx
+    src/orm/PgDialect.cxx \
+    src/db/InTableNode.cxx \
+    src/db/TableColumn.cxx \
+    src/obj/PropertyRole.cxx \
+    src/core/DatabaseConnectionData.cxx \
+    pgconn/PgConn.cxx
 
 HEADERS += \
     src/MainWindow.hxx \
@@ -56,7 +61,13 @@ HEADERS += \
     src/orm/PgDialect.hxx \
     src/db/DatabaseFwd.hxx \
     src/db/SchemaFwd.hxx \
-    src/db/TableFwd.hxx
+    src/db/TableFwd.hxx \
+    src/db/InTableNode.hxx \
+    src/db/TableColumn.hxx \
+    src/obj/PropertyRole.hxx \
+    src/core/DatabaseConnectionData.hxx \
+    pgconn/PgConn.hxx \
+    src/db/TableColumnFwd.hxx
 
 OTHER_FILES += \
     android/version.xml \

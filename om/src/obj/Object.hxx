@@ -7,6 +7,9 @@ class Object : public AbstractObject
 {
 public:
     static QString idPropertyName();
+    static QString versionPropertyName();
+    static QString creationTimestampName();
+    static QString lastModificationTimestampName();
 
     explicit Object(const QUuid& id = OMTools::invalidId());
     virtual ~Object();
