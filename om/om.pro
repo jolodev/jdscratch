@@ -67,7 +67,8 @@ HEADERS += \
     src/obj/PropertyRole.hxx \
     src/core/DatabaseConnectionData.hxx \
     pgconn/PgConn.hxx \
-    src/db/TableColumnFwd.hxx
+    src/db/TableColumnFwd.hxx \
+    src/orm/AbstractTypeTrait.hxx
 
 OTHER_FILES += \
     android/version.xml \
