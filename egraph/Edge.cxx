@@ -1,9 +1,11 @@
 #include "Edge.hxx"
 
-BOOST_CLASS_EXPORT_IMPLEMENT(Edge)
+BOOST_CLASS_EXPORT_IMPLEMENT(EGraph::Edge)
 
 #include <Graph.hxx>
 #include <Vertex.hxx>
+
+using namespace EGraph;
 
 String Edge::idPropertyName()
 {

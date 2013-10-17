@@ -1,12 +1,14 @@
 #include "Graph.hxx"
 
-BOOST_CLASS_EXPORT_IMPLEMENT(Graph)
+BOOST_CLASS_EXPORT_IMPLEMENT(EGraph::Graph)
 
 #include <Vertex.hxx>
 #include <Edge.hxx>
 
 #include <boost/uuid/nil_generator.hpp>
 #include <boost/uuid/random_generator.hpp>
+
+using namespace EGraph;
 
 Id Graph::invalidId()
 {

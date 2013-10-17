@@ -8,6 +8,7 @@
 #include <VertexFwd.hxx>
 #include <VertexProperty.hxx>
 
+namespace EGraph {
 class Vertex
 {
 public:
@@ -62,9 +63,10 @@ private:
     GraphP m_g { nullptr };
     AbstractVertexPropertySPM m_properties;
 };
+}
 
-BOOST_CLASS_EXPORT_KEY(Vertex)
+BOOST_CLASS_EXPORT_KEY(EGraph::Vertex)
 
-BOOST_CLASS_VERSION(Vertex, 1)
+BOOST_CLASS_VERSION(EGraph::Vertex, 1)
 
 #endif // ABSTRACTVERTEX_HXX

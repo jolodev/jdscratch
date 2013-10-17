@@ -1,7 +1,8 @@
 #include "EdgeRoles.hxx"
 
+using namespace EGraph;
 
-String edgeRoleToString(EdgeRoles r)
+String EGraph::edgeRoleToString(EdgeRoles r)
 {
     switch(r) {
     case(EdgeRoles::Unspecified): return "Unspecified";
@@ -13,9 +14,8 @@ String edgeRoleToString(EdgeRoles r)
     }
 }
 
-
-std::ostream &operator<<(std::ostream &strm, const EdgeRoles &r)
+std::ostream &operator<<(std::ostream &strm, const EGraph::EdgeRoles &r)
 {
-    strm << edgeRoleToString(r);
+    strm << EGraph::edgeRoleToString(r);
     return strm;
 }

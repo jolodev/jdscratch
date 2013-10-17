@@ -5,6 +5,8 @@
 #include <VertexTypes.hxx>
 #include <Storage.hxx>
 
+using namespace EGraph;
+
 int main()
 {
     auto g = boost::make_shared<Graph>(Graph("graph.xml"));

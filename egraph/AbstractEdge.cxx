@@ -4,6 +4,8 @@
 #include <Vertex.hxx>
 #include <Graph.hxx>
 
+using namespace EGraph;
+
 AbstractEdge::AbstractEdge()
 {
 }

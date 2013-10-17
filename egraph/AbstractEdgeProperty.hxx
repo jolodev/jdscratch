@@ -3,6 +3,7 @@
 
 #include <AbstractEdgePropertyFwd.hxx>
 
+namespace EGraph {
 class AbstractEdgeProperty {
 public:
     String name() const { return implName(); }
@@ -21,9 +22,10 @@ private:
         (void) v;
     }
 };
+}
 
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(AbstractEdgeProperty)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(EGraph::AbstractEdgeProperty)
 
-BOOST_CLASS_VERSION(AbstractEdgeProperty, 1)
+BOOST_CLASS_VERSION(EGraph::AbstractEdgeProperty, 1)
 
 #endif // ABSTRACTEDGEPROPERTY_HXX

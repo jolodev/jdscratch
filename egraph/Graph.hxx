@@ -9,6 +9,7 @@
 #include <Vertex.hxx>
 #include <Edge.hxx>
 
+namespace EGraph {
 class Graph
 {
 public:
@@ -54,9 +55,10 @@ private:
     VertexSPM m_vertices;
     EdgeSPM m_edges;
 };
+}
 
-BOOST_CLASS_EXPORT_KEY(Graph)
+BOOST_CLASS_EXPORT_KEY(EGraph::Graph)
 
-BOOST_CLASS_VERSION(Graph, 1)
+BOOST_CLASS_VERSION(EGraph::Graph, 1)
 
 #endif // GRAPH_HXX

@@ -3,6 +3,7 @@
 
 #include <AbstractVertexPropertyFwd.hxx>
 
+namespace EGraph {
 class AbstractVertexProperty {
 public:
     String name() const { return implName(); }
@@ -21,9 +22,10 @@ private:
         (void) v;
     }
 };
+}
 
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(AbstractVertexProperty)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(EGraph::AbstractVertexProperty)
 
-BOOST_CLASS_VERSION(AbstractVertexProperty, 1)
+BOOST_CLASS_VERSION(EGraph::AbstractVertexProperty, 1)
 
 #endif // ABSTRACTVERTEXPROPERTY_HXX

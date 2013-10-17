@@ -6,6 +6,7 @@
 #include <EdgeProperty.hxx>
 #include <EdgeRoles.hxx>
 
+namespace EGraph {
 template<typename ValueT>
 class EdgeProperty: public AbstractEdgeProperty {
 public:
@@ -42,15 +43,16 @@ private:
     String m_name { "" };
     ValueT m_value;
 };
+}
 
-BOOST_CLASS_EXPORT_KEY(EdgeProperty<String>)
-BOOST_CLASS_EXPORT_KEY(EdgeProperty<Id>)
-BOOST_CLASS_EXPORT_KEY(EdgeProperty<EdgeDirections>)
-BOOST_CLASS_EXPORT_KEY(EdgeProperty<EdgeRoles>)
+BOOST_CLASS_EXPORT_KEY(EGraph::EdgeProperty<EGraph::String>)
+BOOST_CLASS_EXPORT_KEY(EGraph::EdgeProperty<EGraph::Id>)
+BOOST_CLASS_EXPORT_KEY(EGraph::EdgeProperty<EGraph::EdgeDirections>)
+BOOST_CLASS_EXPORT_KEY(EGraph::EdgeProperty<EGraph::EdgeRoles>)
 
-BOOST_CLASS_VERSION(EdgeProperty<String>, 1)
-BOOST_CLASS_VERSION(EdgeProperty<Id>, 1)
-BOOST_CLASS_VERSION(EdgeProperty<EdgeDirections>, 1)
-BOOST_CLASS_VERSION(EdgeProperty<EdgeRoles>, 1)
+BOOST_CLASS_VERSION(EGraph::EdgeProperty<EGraph::String>, 1)
+BOOST_CLASS_VERSION(EGraph::EdgeProperty<EGraph::Id>, 1)
+BOOST_CLASS_VERSION(EGraph::EdgeProperty<EGraph::EdgeDirections>, 1)
+BOOST_CLASS_VERSION(EGraph::EdgeProperty<EGraph::EdgeRoles>, 1)
 
 #endif // EdgePROPERTY_HXX

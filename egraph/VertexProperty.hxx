@@ -3,6 +3,7 @@
 
 #include <AbstractVertexProperty.hxx>
 
+namespace EGraph {
 template<typename ValueT>
 class VertexProperty: public AbstractVertexProperty {
 public:
@@ -39,12 +40,13 @@ private:
     String m_name { "" };
     ValueT m_value;
 };
+}
 
-BOOST_CLASS_EXPORT_KEY(VertexProperty<String>)
-BOOST_CLASS_EXPORT_KEY(VertexProperty<Id>)
+BOOST_CLASS_EXPORT_KEY(EGraph::VertexProperty<EGraph::String>)
+BOOST_CLASS_EXPORT_KEY(EGraph::VertexProperty<EGraph::Id>)
 
-BOOST_CLASS_VERSION(VertexProperty<String>, 1)
-BOOST_CLASS_VERSION(VertexProperty<Id>, 1)
+BOOST_CLASS_VERSION(EGraph::VertexProperty<EGraph::String>, 1)
+BOOST_CLASS_VERSION(EGraph::VertexProperty<EGraph::Id>, 1)
 
 
 #endif // VERTEXPROPERTY_HXX

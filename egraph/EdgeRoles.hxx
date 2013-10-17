@@ -3,6 +3,7 @@
 
 #include <Global.hxx>
 
+namespace EGraph {
 enum class EdgeRoles
 {
     Unspecified,
@@ -13,7 +14,8 @@ enum class EdgeRoles
 };
 
 String edgeRoleToString(EdgeRoles r);
+}
 
-std::ostream& operator<<(std::ostream& strm, const EdgeRoles& r);
+std::ostream& operator<<(std::ostream& strm, const EGraph::EdgeRoles& r);
 
 #endif // EDGEROLES_HXX

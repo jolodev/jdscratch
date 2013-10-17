@@ -11,6 +11,7 @@
 
 #include <fstream>
 
+namespace EGraph {
 namespace Storage {
 
 template<typename ArchiveT>
@@ -33,6 +34,7 @@ GraphSP load(const String &path)
     ia >> BOOST_SERIALIZATION_NVP(g);
 
     return g;
+}
 }
 }
 

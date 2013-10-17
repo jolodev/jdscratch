@@ -26,6 +26,7 @@
 
 #include <boost/uuid/uuid_serialize.hpp>
 
+namespace EGraph {
 typedef std::string String;
 typedef std::stringstream StringStream;
 
@@ -35,5 +36,6 @@ typedef Uuid Id;
 typedef std::vector<String> StringVector;
 
 String join(const StringVector& v, const String& sep = ", ");
+}
 
 #endif // GLOBAL_HXX

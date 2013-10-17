@@ -1,8 +1,10 @@
 #include "Vertex.hxx"
 
-BOOST_CLASS_EXPORT_IMPLEMENT(Vertex)
+BOOST_CLASS_EXPORT_IMPLEMENT(EGraph::Vertex)
 
 #include <Graph.hxx>
+
+using namespace EGraph;
 
 String Vertex::idPropertyName()
 {

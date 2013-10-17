@@ -9,6 +9,7 @@
 #include <EdgeDirections.hxx>
 #include <EdgeRoles.hxx>
 
+namespace EGraph {
 class AbstractEdge
 {
 public:
@@ -69,9 +70,10 @@ private:
         (void) v;
     }
 };
+}
 
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(AbstractEdge)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(EGraph::AbstractEdge)
 
-BOOST_CLASS_VERSION(AbstractEdge, 1)
+BOOST_CLASS_VERSION(EGraph::AbstractEdge, 1)
 
 #endif // ABSTRACTEDGE_HXX

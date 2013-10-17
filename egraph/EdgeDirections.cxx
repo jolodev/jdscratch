@@ -1,6 +1,8 @@
 #include <EdgeDirections.hxx>
 
-String edgeDirectionToString(EdgeDirections d)
+using namespace EGraph;
+
+String EGraph::edgeDirectionToString(EdgeDirections d)
 {
     switch (d) {
     case(EdgeDirections::In): return "IN";
@@ -10,8 +12,8 @@ String edgeDirectionToString(EdgeDirections d)
     }
 }
 
-std::ostream &operator<<(std::ostream &strm, const EdgeDirections &d)
+std::ostream &operator<<(std::ostream &strm, const EGraph::EdgeDirections &d)
 {
-    strm << edgeDirectionToString(d);
+    strm << EGraph::edgeDirectionToString(d);
     return strm;
 }

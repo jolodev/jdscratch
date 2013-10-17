@@ -10,6 +10,7 @@
 #include <GraphFwd.hxx>
 #include <EdgeFwd.hxx>
 
+namespace EGraph {
 class Edge : public AbstractEdge
 {
 public:
@@ -82,8 +83,9 @@ private:
 
     AbstractEdgePropertySPM m_properties;
 };
+}
 
-BOOST_CLASS_EXPORT_KEY(Edge)
+BOOST_CLASS_EXPORT_KEY(EGraph::Edge)
 
-BOOST_CLASS_VERSION(Edge, 1)
+BOOST_CLASS_VERSION(EGraph::Edge, 1)
 #endif // EDGE_HXX
