@@ -5,6 +5,6 @@
 
 class Graph;
 typedef Graph* GraphP;
-typedef std::shared_ptr<Graph> GraphSP;
+typedef boost::shared_ptr<Graph> GraphSP;
 
 #endif // GRAPHFWD_HXX

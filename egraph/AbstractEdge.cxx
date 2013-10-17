@@ -33,14 +33,24 @@ Id AbstractEdge::id() const
     return implId();
 }
 
-Id AbstractEdge::leftId() const
+Id AbstractEdge::leftVertexId() const
 {
-    return implLeftId();
+    return implLeftVertexId();
 }
 
-Id AbstractEdge::rightId() const
+Id AbstractEdge::rightVertexId() const
 {
-    return implRightId();
+    return implRightVertexId();
+}
+
+VertexSP AbstractEdge::leftVertex() const
+{
+    return implLeftVertex();
+}
+
+VertexSP AbstractEdge::rightVertex() const
+{
+    return implRightVertex();
 }
 
 void AbstractEdge::setDirection(EdgeDirections d)
@@ -50,12 +60,12 @@ void AbstractEdge::setDirection(EdgeDirections d)
 
 void AbstractEdge::setLeftId(const Id &id)
 {
-    implSetLeftId(id);
+    implSetLeftVertexId(id);
 }
 
 void AbstractEdge::setRightId(const Id &id)
 {
-    implSetRightId(id);
+    implSetRightVertexId(id);
 }
 
 void AbstractEdge::setLeftVertex(VertexSP v)
@@ -79,19 +89,40 @@ String AbstractEdge::toString() const
     return implToString();
 }
 
+String AbstractEdge::connectionInfoToString(const EdgeDirections d, const EdgeRoles r) const
+{
+    StringStream s;
+
+    switch(d) {
+    case(EdgeDirections::In): {
+        s << "<-- " /*<< edgeDirectionToString(d) << "/"*/ << edgeRoleToString(r) << " --";
+        break;
+    }
+    case(EdgeDirections::Out): {
+        s << "-- " /*<< edgeDirectionToString(d) << "/"*/ << edgeRoleToString(r) << " -->";
+        break;
+    }
+    default: {
+        s << "?-- " /*<< edgeDirectionToString(d) << "/"*/ << edgeRoleToString(r) << " --?";
+        break;
+    }
+    }
+
+    return s.str();
+}
+
 String AbstractEdge::implToString() const
 {
-    auto leftVertex = graph()->vertex(leftId());
-    auto rightVertex = graph()->vertex(rightId());
+    auto leftVertex = graph()->vertex(leftVertexId());
+    auto rightVertex = graph()->vertex(rightVertexId());
 
     assert(leftVertex);
     assert(rightVertex);
 
     StringStream s;
-    s << leftVertex->property<String>(Vertex::labelPropertyName())->value() << " [" << leftId() << "] ";
-    s << edgeDirectionToString(direction()) << " ";
-    s << rightVertex->property<String>(Vertex::labelPropertyName())->value() << " [" << rightId() << "]: ";
-    s << edgeRoleToString(role());
+    s << leftVertex->label();// << " [" << leftVertexId() << "] ";
+    s << " " << connectionInfoToString(direction(), role()) << " ";
+    s << rightVertex->label();// << " [" << rightVertexId() << "]";
 
     return s.str();
 }

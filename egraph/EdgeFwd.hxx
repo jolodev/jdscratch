@@ -5,7 +5,7 @@
 
 class Edge;
 typedef Edge* EdgeP;
-typedef std::shared_ptr<Edge> EdgeSP;
+typedef boost::shared_ptr<Edge> EdgeSP;
 typedef std::vector<EdgeSP> EdgeSPV;
 typedef std::map<Id, EdgeSP> EdgeSPM;
 

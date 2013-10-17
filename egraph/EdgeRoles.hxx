@@ -8,7 +8,8 @@ enum class EdgeRoles
     Unspecified,
     IsSubType,
     IsSuperType,
-    IsPartOf
+    IsPartOf,
+    Contains
 };
 
 String edgeRoleToString(EdgeRoles r);

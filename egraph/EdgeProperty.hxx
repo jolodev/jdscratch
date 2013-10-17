@@ -1,23 +1,10 @@
 #ifndef EDGEPROPERTY_HXX
 #define EDGEPROPERTY_HXX
 
-#include <Global.hxx>
+#include <AbstractEdgeProperty.hxx>
 
-#include <EdgeDirections.hxx>
-
-class AbstractEdgeProperty {
-public:
-    String name() const { return implName(); }
-    String toString() const { return implToString(); }
-
-protected:
-    virtual String implName() const = 0;
-    virtual String implToString() const = 0;
-};
-
-typedef std::shared_ptr<AbstractEdgeProperty> AbstractEdgePropertySP;
-typedef std::vector<AbstractEdgePropertySP> AbstractEdgePropertySPV;
-typedef std::map<String, AbstractEdgePropertySP> AbstractEdgePropertySPM;
+#include <EdgeProperty.hxx>
+#include <EdgeRoles.hxx>
 
 template<typename ValueT>
 class EdgeProperty: public AbstractEdgeProperty {
@@ -41,8 +28,29 @@ protected:
     }
 
 private:
+    friend class boost::serialization::access;
+    template<class Archive>
+        void serialize(Archive& a, const unsigned int v)
+        {
+            (void) v;
+
+            a & BOOST_SERIALIZATION_BASE_OBJECT_NVP(AbstractEdgeProperty);
+            a & BOOST_SERIALIZATION_NVP(m_name);
+            a & BOOST_SERIALIZATION_NVP(m_value);
+        }
+
     String m_name { "" };
     ValueT m_value;
 };
+
+BOOST_CLASS_EXPORT_KEY(EdgeProperty<String>)
+BOOST_CLASS_EXPORT_KEY(EdgeProperty<Id>)
+BOOST_CLASS_EXPORT_KEY(EdgeProperty<EdgeDirections>)
+BOOST_CLASS_EXPORT_KEY(EdgeProperty<EdgeRoles>)
+
+BOOST_CLASS_VERSION(EdgeProperty<String>, 1)
+BOOST_CLASS_VERSION(EdgeProperty<Id>, 1)
+BOOST_CLASS_VERSION(EdgeProperty<EdgeDirections>, 1)
+BOOST_CLASS_VERSION(EdgeProperty<EdgeRoles>, 1)
 
 #endif // EdgePROPERTY_HXX

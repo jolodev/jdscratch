@@ -14,7 +14,10 @@ SOURCES += \
     Edge.cxx \
     main.cxx \
     EdgeDirections.cxx \
-    EdgeRoles.cxx
+    EdgeRoles.cxx \
+    Storage.cxx \
+    EdgeProperty.cxx \
+    VertexProperty.cxx
 
 HEADERS += \
     Global.hxx \
@@ -29,5 +32,12 @@ HEADERS += \
     VertexFwd.hxx \
     EdgeRoles.hxx \
     EdgeProperty.hxx \
-    VertexTypes.hxx
+    VertexTypes.hxx \
+    AbstractVertexProperty.hxx \
+    AbstractVertexPropertyFwd.hxx \
+    AbstractEdgeProperty.hxx \
+    AbstractEdgePropertyFwd.hxx \
+    Storage.hxx
 
+
+unix:!macx: LIBS += -lboost_serialization

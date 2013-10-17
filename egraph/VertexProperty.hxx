@@ -1,21 +1,7 @@
 #ifndef VERTEXPROPERTY_HXX
 #define VERTEXPROPERTY_HXX
 
-#include <Global.hxx>
-
-class AbstractVertexProperty {
-public:
-    String name() const { return implName(); }
-    String toString() const { return implToString(); }
-
-protected:
-    virtual String implName() const = 0;
-    virtual String implToString() const = 0;
-};
-
-typedef std::shared_ptr<AbstractVertexProperty> AbstractVertexPropertySP;
-typedef std::vector<AbstractVertexPropertySP> AbstractVertexPropertySPV;
-typedef std::map<String, AbstractVertexPropertySP> AbstractVertexPropertySPM;
+#include <AbstractVertexProperty.hxx>
 
 template<typename ValueT>
 class VertexProperty: public AbstractVertexProperty {
@@ -39,8 +25,26 @@ protected:
     }
 
 private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive& a, const unsigned int v)
+    {
+        (void) v;
+
+        a & BOOST_SERIALIZATION_BASE_OBJECT_NVP(AbstractVertexProperty);
+        a & BOOST_SERIALIZATION_NVP(m_name);
+        a & BOOST_SERIALIZATION_NVP(m_value);
+    }
+
     String m_name { "" };
     ValueT m_value;
 };
+
+BOOST_CLASS_EXPORT_KEY(VertexProperty<String>)
+BOOST_CLASS_EXPORT_KEY(VertexProperty<Id>)
+
+BOOST_CLASS_VERSION(VertexProperty<String>, 1)
+BOOST_CLASS_VERSION(VertexProperty<Id>, 1)
+
 
 #endif // VERTEXPROPERTY_HXX

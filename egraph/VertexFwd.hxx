@@ -5,7 +5,7 @@
 
 class Vertex;
 typedef Vertex* VertexP;
-typedef std::shared_ptr<Vertex> VertexSP;
+typedef boost::shared_ptr<Vertex> VertexSP;
 typedef std::vector<VertexSP> VertexSPV;
 typedef std::map<Id, VertexSP> VertexSPM;
 

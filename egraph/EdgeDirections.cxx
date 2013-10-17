@@ -3,10 +3,10 @@
 String edgeDirectionToString(EdgeDirections d)
 {
     switch (d) {
-    case(EdgeDirections::In): return "<- IN --";
-    case(EdgeDirections::Out): return "-- OUT -->";
-    case(EdgeDirections::InOut): // fall through
-    default: return "-- ? --";
+    case(EdgeDirections::In): return "IN";
+    case(EdgeDirections::Out): return "OUT";
+    case(EdgeDirections::InOut): return "IN OUT";
+    default: return "??";
     }
 }
 

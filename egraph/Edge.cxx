@@ -1,5 +1,7 @@
 #include "Edge.hxx"
 
+BOOST_CLASS_EXPORT_IMPLEMENT(Edge)
+
 #include <Graph.hxx>
 #include <Vertex.hxx>
 
@@ -28,10 +30,10 @@ String Edge::rolePropertyName()
     return "_role";
 }
 
-Edge::Edge(GraphP g, const EdgeDirections d, VertexSP left, VertexSP right, const EdgeRoles r)
+Edge::Edge(GraphP g, VertexSP left, VertexSP right, const EdgeDirections d, const EdgeRoles r)
     : m_g(g)
 {
-    assert(g);
+    assert(m_g);
     (void) createProperty<Id>(Edge::idPropertyName(), Graph::createId());
     (void) createProperty<Id>(Edge::leftVertrexIdPropertyName(), left->property<Id>(Vertex::idPropertyName())->value());
     (void) createProperty<Id>(Edge::rightVertexIdPropertyName(), right->property<Id>(Vertex::idPropertyName())->value());
@@ -52,12 +54,16 @@ AbstractEdgePropertySPV Edge::properties() const {
     return r;
 }
 
-Id Edge::implLeftId() const
+Edge::Edge()
+{
+}
+
+Id Edge::implLeftVertexId() const
 {
     return property<Id>(Edge::leftVertrexIdPropertyName())->value();
 }
 
-Id Edge::implRightId() const
+Id Edge::implRightVertexId() const
 {
     return property<Id>(Edge::rightVertexIdPropertyName())->value();
 }
@@ -77,12 +83,12 @@ void Edge::implSetDirection(EdgeDirections d)
     return property<EdgeDirections>(Edge::directionPropertyName())->setValue(d);
 }
 
-void Edge::implSetLeftId(const Id &id)
+void Edge::implSetLeftVertexId(const Id &id)
 {
     property<Id>(Edge::leftVertrexIdPropertyName())->setValue(id);
 }
 
-void Edge::implSetRightId(const Id &id)
+void Edge::implSetRightVertexId(const Id &id)
 {
     property<Id>(Edge::rightVertexIdPropertyName())->setValue(id);
 }
@@ -102,6 +108,16 @@ void Edge::implSetRightVertex(VertexSP r)
 GraphP Edge::implGraph() const
 {
     return m_g;
+}
+
+VertexSP Edge::implLeftVertex() const
+{
+    return graph()->vertex(leftVertexId());
+}
+
+VertexSP Edge::implRightVertex() const
+{
+    return graph()->vertex(rightVertexId());
 }
 
 Id Edge::implId() const

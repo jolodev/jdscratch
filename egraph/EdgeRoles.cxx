@@ -8,6 +8,7 @@ String edgeRoleToString(EdgeRoles r)
     case(EdgeRoles::IsSubType): return "Is Sub Type";
     case(EdgeRoles::IsSuperType): return "Is Super Type";
     case(EdgeRoles::IsPartOf): return "Is Part Of";
+    case(EdgeRoles::Contains): return "Contains";
     default: return "Unknown";
     }
 }

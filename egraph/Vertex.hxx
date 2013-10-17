@@ -20,31 +20,51 @@ public:
 
     GraphP graph() const;
 
+    String toString() const;
+
+    Id id() const;
+    String label() const;
+    String type() const;
+
     StringVector propertyNames() const;
     AbstractVertexPropertySPV properties() const;
 
     template<typename ValueT>
     AbstractVertexPropertySP createProperty(const String& name, const ValueT& value) {
-        auto p = std::make_shared<VertexProperty<ValueT> >(VertexProperty<ValueT>(name, value));
+        auto p = boost::make_shared<VertexProperty<ValueT> >(VertexProperty<ValueT>(name, value));
         registerProperty(p);
         return p;
     }
 
     template<typename ValueT>
-    std::shared_ptr<VertexProperty<ValueT> > property(const String& name) const {
+    boost::shared_ptr<VertexProperty<ValueT> > property(const String& name) const {
         auto i = m_properties.find(name);
 
         assert(m_properties.end() != i);
 
-        return (std::dynamic_pointer_cast<VertexProperty<ValueT> >((*i).second));
+        return (boost::dynamic_pointer_cast<VertexProperty<ValueT> >((*i).second));
     }
 
 protected:
     virtual void registerProperty(AbstractVertexPropertySP p);
 
 private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive& a, const unsigned int v)
+    {
+        (void) v;
+
+        a & BOOST_SERIALIZATION_NVP(m_g);
+        a & BOOST_SERIALIZATION_NVP(m_properties);
+    }
+
     GraphP m_g { nullptr };
     AbstractVertexPropertySPM m_properties;
 };
+
+BOOST_CLASS_EXPORT_KEY(Vertex)
+
+BOOST_CLASS_VERSION(Vertex, 1)
 
 #endif // ABSTRACTVERTEX_HXX

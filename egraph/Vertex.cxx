@@ -1,5 +1,7 @@
 #include "Vertex.hxx"
 
+BOOST_CLASS_EXPORT_IMPLEMENT(Vertex)
+
 #include <Graph.hxx>
 
 String Vertex::idPropertyName()
@@ -38,6 +40,28 @@ void Vertex::registerProperty(AbstractVertexPropertySP p)
 GraphP Vertex::graph() const
 {
     return m_g;
+}
+
+String Vertex::toString() const
+{
+    StringStream s;
+    s << type() << ": " << label() << ": {" << id() << "}";
+    return s.str();
+}
+
+Id Vertex::id() const
+{
+    return property<Id>(Vertex::idPropertyName())->value();
+}
+
+String Vertex::label() const
+{
+    return property<String>(Vertex::labelPropertyName())->value();
+}
+
+String Vertex::type() const
+{
+    return property<String>(Vertex::typePropertyName())->value();
 }
 
 StringVector Vertex::propertyNames() const
