@@ -4,7 +4,6 @@
 #include <GraphFwd.hxx>
 
 #include <EdgeDirections.hxx>
-#include <EdgeRoles.hxx>
 
 #include <Vertex.hxx>
 #include <Edge.hxx>
@@ -30,16 +29,24 @@ public:
     const VertexSPV verticesWithType(const String& t) const;
     const EdgeSPV edges(VertexSP start, EdgeDirections direction) const;
 
+    void removeVertex(VertexSP v);
     VertexSP createVertex(const String &typeName = "", const String& lbl = "");
     VertexSP vertex(const Id& id) const;
 
-    EdgeSP createEdge(VertexSP left, VertexSP right, EdgeRoles r = EdgeRoles::Unspecified, EdgeDirections d = EdgeDirections::Out);
+    void removeEdge(EdgeSP e);
+    EdgeSP createEdge(VertexSP left, VertexSP right, const String &r = "", EdgeDirections d = EdgeDirections::Out);
 
     void debug(std::ostream& strm = std::cout) const;
     void debugVertices(std::ostream& strm = std::cout) const;
     void debugEdges(std::ostream& strm = std::cout) const;
 
+    void registerEdgeRole(const String& r);
+    bool hasEdgeRole(const String& r) const;
+    StringVector edgeRoles() const;
+
 private:
+    void removeEdgesWith(VertexSP v);
+
     friend class boost::serialization::access;
 
     template<class Archive>
@@ -49,11 +56,13 @@ private:
             a & BOOST_SERIALIZATION_NVP(m_fname);
             a & BOOST_SERIALIZATION_NVP(m_vertices);
             a & BOOST_SERIALIZATION_NVP(m_edges);
+            a & BOOST_SERIALIZATION_NVP(m_edgeRoles);
         }
 
     String m_fname;
     VertexSPM m_vertices;
     EdgeSPM m_edges;
+    StringVector m_edgeRoles;
 };
 }
 

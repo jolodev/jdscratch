@@ -7,7 +7,6 @@
 #include <VertexFwd.hxx>
 
 #include <EdgeDirections.hxx>
-#include <EdgeRoles.hxx>
 
 namespace EGraph {
 class AbstractEdge
@@ -19,7 +18,7 @@ public:
     GraphP graph() const;
 
     EdgeDirections direction() const;
-    EdgeRoles role() const;
+    String role() const;
 
     Id id() const;
     Id leftVertexId() const;
@@ -40,7 +39,7 @@ public:
     String toString() const;
 
 protected:
-    virtual String connectionInfoToString(const EdgeDirections d, const EdgeRoles r) const;
+    virtual String connectionInfoToString(const EdgeDirections d, const String &r) const;
 
     virtual String implToString() const;
 
@@ -49,7 +48,7 @@ protected:
     virtual VertexSP implRightVertex() const = 0;
 
     virtual EdgeDirections implDirection() const = 0;
-    virtual EdgeRoles implRole() const = 0;
+    virtual String implRole() const = 0;
 
     virtual Id implId() const = 0;
     virtual Id implLeftVertexId() const = 0;

@@ -32,7 +32,7 @@ String Edge::rolePropertyName()
     return "_role";
 }
 
-Edge::Edge(GraphP g, VertexSP left, VertexSP right, const EdgeDirections d, const EdgeRoles r)
+Edge::Edge(GraphP g, VertexSP left, VertexSP right, const EdgeDirections d, const String r)
     : m_g(g)
 {
     assert(m_g);
@@ -40,7 +40,7 @@ Edge::Edge(GraphP g, VertexSP left, VertexSP right, const EdgeDirections d, cons
     (void) createProperty<Id>(Edge::leftVertrexIdPropertyName(), left->property<Id>(Vertex::idPropertyName())->value());
     (void) createProperty<Id>(Edge::rightVertexIdPropertyName(), right->property<Id>(Vertex::idPropertyName())->value());
     (void) createProperty<EdgeDirections>(Edge::directionPropertyName(), d);
-    (void) createProperty<EdgeRoles>(Edge::rolePropertyName(), r);
+    (void) createProperty<String>(Edge::rolePropertyName(), r);
 }
 
 Edge::~Edge()
@@ -75,9 +75,9 @@ EdgeDirections Edge::implDirection() const
     return property<EdgeDirections>(Edge::directionPropertyName())->value();
 }
 
-EdgeRoles Edge::implRole() const
+String Edge::implRole() const
 {
-    return property<EdgeRoles>(Edge::rolePropertyName())->value();
+    return property<String>(Edge::rolePropertyName())->value();
 }
 
 void Edge::implSetDirection(EdgeDirections d)

@@ -13,7 +13,6 @@ SOURCES += \
     Vertex.cxx \
     Edge.cxx \
     EdgeDirections.cxx \
-    EdgeRoles.cxx \
     Storage.cxx \
     EdgeProperty.cxx \
     VertexProperty.cxx
@@ -29,9 +28,7 @@ HEADERS += \
     EdgeDirections.hxx \
     Vertex.hxx \
     VertexFwd.hxx \
-    EdgeRoles.hxx \
     EdgeProperty.hxx \
-    VertexTypes.hxx \
     AbstractVertexProperty.hxx \
     AbstractVertexPropertyFwd.hxx \
     AbstractEdgeProperty.hxx \

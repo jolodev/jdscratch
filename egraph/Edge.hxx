@@ -4,7 +4,6 @@
 #include <AbstractEdge.hxx>
 
 #include <EdgeProperty.hxx>
-#include <EdgeRoles.hxx>
 
 #include <VertexFwd.hxx>
 #include <GraphFwd.hxx>
@@ -20,7 +19,7 @@ public:
     static String directionPropertyName();
     static String rolePropertyName();
 
-    explicit Edge(GraphP g, VertexSP left, VertexSP right, const EdgeDirections d, const EdgeRoles r);
+    explicit Edge(GraphP g, VertexSP left, VertexSP right, const EdgeDirections d, const String r = "");
     virtual ~Edge();
 
     AbstractEdgePropertySPV properties() const;
@@ -54,7 +53,7 @@ protected:
     VertexSP implRightVertex() const override;
 
     EdgeDirections implDirection() const override;
-    EdgeRoles implRole() const override;
+    String implRole() const override;
 
     Id implId() const;
     Id implLeftVertexId() const override;

@@ -94,6 +94,15 @@ const EdgeSPV Graph::edges(VertexSP start, EdgeDirections d) const
     return r;
 }
 
+void Graph::removeVertex(VertexSP v)
+{
+    removeEdgesWith(v);
+
+    auto i = m_vertices.find(v->id());
+
+    m_vertices.erase(i);
+}
+
 void Graph::debug(std::ostream &strm) const
 {
     strm << std::endl << "== Begin of Graph ==" << std::endl;
@@ -127,6 +136,45 @@ void Graph::debugEdges(std::ostream &strm) const
     strm << std::endl << "-- End of Edges ==" << std::endl;
 }
 
+void Graph::registerEdgeRole(const String &r)
+{
+    assert(!hasEdgeRole(r));
+    m_edgeRoles.push_back(r);
+}
+
+bool Graph::hasEdgeRole(const String &r) const
+{
+    for (auto i : edgeRoles()) {
+        if (i == r) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+StringVector Graph::edgeRoles() const
+{
+    return m_edgeRoles;
+}
+
+void Graph::removeEdgesWith(VertexSP v)
+{
+    auto del = std::vector<Id>();
+
+    for (auto i : m_edges) {
+        if ((i.second->leftVertexId() == v->id()) || (i.second->rightVertexId() == v->id())) {
+            del.push_back(i.second->id());
+        }
+    }
+
+    for (auto id : del) {
+        auto i = m_edges.find(id);
+
+        m_edges.erase(i);
+    }
+}
+
 VertexSP Graph::createVertex(const String &typeName, const String &lbl)
 {
     auto v = boost::make_shared<Vertex>(this, lbl, typeName);
@@ -143,8 +191,18 @@ VertexSP Graph::vertex(const Id &id) const
     return (*i).second;
 }
 
-EdgeSP Graph::createEdge(VertexSP left, VertexSP right, EdgeRoles r, EdgeDirections d)
+void Graph::removeEdge(EdgeSP e)
 {
+    auto i = m_edges.find(e->id());
+    m_edges.erase(i);
+}
+
+EdgeSP Graph::createEdge(VertexSP left, VertexSP right, const String& r, EdgeDirections d)
+{
+    if (!r.empty()) {
+        assert(hasEdgeRole(r));
+    }
+
     auto e = boost::make_shared<Edge>(Edge(this, left, right, d, r));
     m_edges[e->id()] = e;
     return e;

@@ -25,7 +25,7 @@ EdgeDirections AbstractEdge::direction() const
     return implDirection();
 }
 
-EdgeRoles AbstractEdge::role() const
+String AbstractEdge::role() const
 {
     return implRole();
 }
@@ -91,21 +91,21 @@ String AbstractEdge::toString() const
     return implToString();
 }
 
-String AbstractEdge::connectionInfoToString(const EdgeDirections d, const EdgeRoles r) const
+String AbstractEdge::connectionInfoToString(const EdgeDirections d, const String& r) const
 {
     StringStream s;
 
     switch(d) {
     case(EdgeDirections::In): {
-        s << "<-- " /*<< edgeDirectionToString(d) << "/"*/ << edgeRoleToString(r) << " --";
+        s << "<-- " /*<< edgeDirectionToString(d) << "/"*/ << r << " --";
         break;
     }
     case(EdgeDirections::Out): {
-        s << "-- " /*<< edgeDirectionToString(d) << "/"*/ << edgeRoleToString(r) << " -->";
+        s << "-- " /*<< edgeDirectionToString(d) << "/"*/ << r << " -->";
         break;
     }
     default: {
-        s << "?-- " /*<< edgeDirectionToString(d) << "/"*/ << edgeRoleToString(r) << " --?";
+        s << "?-- " /*<< edgeDirectionToString(d) << "/"*/ << r << " --?";
         break;
     }
     }
