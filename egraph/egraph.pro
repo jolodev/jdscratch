@@ -1,4 +1,4 @@
-TEMPLATE = app
+TEMPLATE = lib
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
@@ -12,7 +12,6 @@ SOURCES += \
     AbstractEdge.cxx \
     Vertex.cxx \
     Edge.cxx \
-    main.cxx \
     EdgeDirections.cxx \
     EdgeRoles.cxx \
     Storage.cxx \
@@ -38,6 +37,5 @@ HEADERS += \
     AbstractEdgeProperty.hxx \
     AbstractEdgePropertyFwd.hxx \
     Storage.hxx
-
 
 unix:!macx: LIBS += -lboost_serialization
