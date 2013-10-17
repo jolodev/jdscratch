@@ -1,10 +1,10 @@
 #include <Graph.hxx>
 #include <Storage.hxx>
 
-#include <VertexTypes.hxx>
-#include <RoleTypes.hxx>
+#include <Config.hxx>
 
 using namespace EGraph;
+using namespace Config;
 
 int main()
 {

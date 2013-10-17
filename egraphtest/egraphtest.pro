@@ -15,5 +15,4 @@ INCLUDEPATH += $$PWD/../egraph
 DEPENDPATH += $$PWD/../egraph
 
 HEADERS += \
-    VertexTypes.hxx \
-    RoleTypes.hxx
+    Config.hxx
