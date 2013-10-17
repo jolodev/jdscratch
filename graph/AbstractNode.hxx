@@ -14,9 +14,12 @@ public:
     String toString() const;
 
     Graph* graph() const;
+
     Id id() const;
+    String label() const;
 
 protected:
+    virtual String implLabel() const = 0;
     virtual Id implId() const = 0;
     virtual Graph* implGraph() const = 0;
     virtual String implToString() const = 0;

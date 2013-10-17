@@ -9,7 +9,7 @@ public:
     static String singular();
     static String plural();
 
-    explicit FossilType();
+    explicit FossilType(AbstractNode* n = nullptr);
     virtual ~FossilType();
 };
 

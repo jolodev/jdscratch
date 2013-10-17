@@ -16,6 +16,7 @@ public:
     void setName(const String& n);
     void setComment(const String& c);
 
+    Id id() const;
     String name() const;
     String comment() const;
 
@@ -24,11 +25,12 @@ public:
 protected:
     virtual AbstractNode* implNode() const = 0;
 
-    virtual String implToString() const;
+    virtual String implToString() const = 0;
 
     virtual void implSetName(const String& n) = 0;
     virtual void implSetComment(const String& c) = 0;
 
+    virtual Id implId() const = 0;
     virtual String implName() const = 0;
     virtual String implComment() const = 0;
 };

@@ -1,5 +1,7 @@
 #include "AbstractNodePayload.hxx"
 
+#include <AbstractNode.hxx>
+
 AbstractNodePayload::AbstractNodePayload()
 {
 }
@@ -24,6 +26,11 @@ void AbstractNodePayload::setComment(const String &c)
     implSetComment(c);
 }
 
+Id AbstractNodePayload::id() const
+{
+    return implId();
+}
+
 String AbstractNodePayload::name() const
 {
     return implName();
@@ -39,7 +46,3 @@ AbstractNode *AbstractNodePayload::node() const
     return implNode();
 }
 
-String AbstractNodePayload::implToString() const
-{
-    return name();
-}

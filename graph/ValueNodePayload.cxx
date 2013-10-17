@@ -5,8 +5,8 @@ String ValueNodePayload::singular()
     return "Value Node";
 }
 
-ValueNodePayload::ValueNodePayload()
-    : NodePayload()
+ValueNodePayload::ValueNodePayload(AbstractNode *n)
+    : NodePayload(n)
 {
 }
 

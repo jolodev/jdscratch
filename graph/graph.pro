@@ -17,7 +17,8 @@ SOURCES += \
     ValueNodePayload.cxx \
     Tools.cxx \
     FossilType.cxx \
-    EdgeTypes.cxx
+    EdgeTypes.cxx \
+    Fossil.cxx
 
 HEADERS += \
     Types.hxx \
@@ -31,5 +32,6 @@ HEADERS += \
     ValueNodePayload.hxx \
     Tools.hxx \
     FossilType.hxx \
-    EdgeTypes.hxx
+    EdgeTypes.hxx \
+    Fossil.hxx
 

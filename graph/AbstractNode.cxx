@@ -22,3 +22,8 @@ Id AbstractNode::id() const
 {
     return implId();
 }
+
+String AbstractNode::label() const
+{
+    return implLabel();
+}

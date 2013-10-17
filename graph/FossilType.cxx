@@ -10,8 +10,8 @@ String FossilType::plural()
     return "Fossil Types";
 }
 
-FossilType::FossilType()
-    : ValueNodePayload()
+FossilType::FossilType(AbstractNode *n)
+    : ValueNodePayload(n)
 {
 }
 

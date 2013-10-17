@@ -3,32 +3,37 @@
 
 #include <AbstractNode.hxx>
 
-#include <Tools.hxx>
 
 template<typename PayloadT>
 class Node: public AbstractNode {
 public:
     static String singular() { return PayloadT::singular(); }
+    static String plural() { return PayloadT::plural(); }
 
     using PayloadType = PayloadT;
 
-    explicit Node(Graph* g = nullptr): AbstractNode(), m_id(createNodeId()), m_g(g), m_d(std::make_shared<PayloadT>(PayloadT())) {}
+    explicit Node(Graph* g = nullptr): AbstractNode(), m_g(g) {
+        m_d = std::make_shared<PayloadT>(PayloadT(this));
+    }
+
     virtual ~Node() { }
 
-    std::shared_ptr<PayloadT> data() const { return m_d; }
+    std::shared_ptr<PayloadT> data() const {
+        return m_d;
+    }
 
 protected:
-    virtual Id implId() const override { return m_id; }
+    virtual String implLabel() const override { return data()->name(); }
+    virtual Id implId() const override { return data()->id(); }
     virtual Graph* implGraph() const override { return m_g; }
 
     virtual String implToString() const override {
         StringStream s;
-        s << PayloadT::singular() << " [" << id() << "]: " << data()->toString();
+        s << PayloadT::singular() << " [" << id() << "] " << label();
         return s.str();
     }
 
 private:
-    Id m_id { invalidId() };
     Graph* m_g { nullptr };
     std::shared_ptr<PayloadT> m_d;
 };

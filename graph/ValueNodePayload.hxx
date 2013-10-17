@@ -8,7 +8,7 @@ class ValueNodePayload : public NodePayload
 public:
     static String singular();
 
-    explicit ValueNodePayload();
+    explicit ValueNodePayload(AbstractNode* n = nullptr);
     virtual ~ValueNodePayload();
 };
 

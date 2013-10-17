@@ -25,6 +25,24 @@ void Graph::printOn(std::ostream &strm) const
     strm << std::endl << "=== END ===" << std::endl;
 }
 
+void Graph::printEdgesWithLeftNode(AbstractNodeSP n, std::ostream &strm) const
+{
+    strm << std::endl << "Edges with left node to " << n->toString();
+
+    for (auto e : edgesWithLeft(n)) {
+        strm << std::endl << "\t" << e->toString();
+    }
+}
+
+void Graph::printEdgesWithRightNode(AbstractNodeSP n, std::ostream &strm) const
+{
+    strm << std::endl << "Edges with right node to " << n->toString();
+
+    for (auto e : edgesWithRight(n)) {
+        strm << std::endl << "\t" << e->toString();
+    }
+}
+
 AbstractEdgeSP Graph::createEdge(EdgeTypes t, AbstractNodeSP l, AbstractNodeSP r)
 {
     auto e = std::make_shared<Edge>(Edge(t, l, r));
