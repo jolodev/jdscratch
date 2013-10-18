@@ -8,8 +8,10 @@ class AbstractVertexProperty {
 public:
     String name() const { return implName(); }
     String toString() const { return implToString(); }
+    String valueToString() const { return implValueToString(); }
 
 protected:
+    virtual String implValueToString() const = 0;
     virtual String implName() const = 0;
     virtual String implToString() const = 0;
 

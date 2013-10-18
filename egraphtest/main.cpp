@@ -1,5 +1,7 @@
 #include <Graph.hxx>
 #include <Storage.hxx>
+#include <Server.hxx>
+#include <HtmlFormat.hxx>
 
 #include <Config.hxx>
 
@@ -9,6 +11,8 @@ using namespace Config;
 int main()
 {
     auto g = boost::make_shared<Graph>(Graph("graph.xml"));
+    auto srv = boost::make_shared<Server<HtmlFormat> >(Server<HtmlFormat>(g));
+
     g->registerEdgeRole(RoleTypes::Contains);
     g->registerEdgeRole(RoleTypes::IsPartOf);
     g->registerEdgeRole(RoleTypes::IsSubType);
@@ -28,7 +32,7 @@ int main()
 
     g->createEdge(boneFossil, bodyFossil, RoleTypes::IsSubType);
     g->createEdge(bodyFossil, boneFossil, RoleTypes::IsSuperType);
-
+/*
     g->debug();
 
     Graph::debug(g->verticesWithType(VertexTypes::Model), "Model");
@@ -43,6 +47,8 @@ int main()
     assert(boneFossil2->id() == boneFossil->id());
     g2->removeVertex(boneFossil2);
     g2->debug();
+*/
+    std::cout << srv->present(model) << std::endl;
 
     return EXIT_SUCCESS;
 }

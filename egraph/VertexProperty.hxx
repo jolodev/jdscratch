@@ -15,9 +15,9 @@ public:
 
     ValueT value() const { return m_value; }
 
-    String valueToString() const { StringStream s; s << value(); return s.str(); }
-
 protected:
+    String implValueToString() const { StringStream s; s << value(); return s.str(); }
+
     String implName() const override { return m_name; }
     String implToString() const override {
         StringStream s;

@@ -9,10 +9,14 @@ QMAKE_CXX = clang++
 SOURCES += main.cpp
 
 unix:!macx: LIBS += -L$$PWD/../build-egraph-Desktop-Debug/ -legraph
+unix:!macx: LIBS += -L$$PWD/../build-egraphsrv-Desktop-Debug/ -legraphsrv
 unix:!macx: LIBS += -lboost_serialization
 
 INCLUDEPATH += $$PWD/../egraph
+INCLUDEPATH += $$PWD/../egraphsrv
+
 DEPENDPATH += $$PWD/../egraph
+DEPENDPATH += $$PWD/../egraphsrv
 
 HEADERS += \
     Config.hxx
