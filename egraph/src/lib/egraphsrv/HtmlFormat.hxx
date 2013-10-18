@@ -17,7 +17,7 @@ public:
     virtual ~HtmlFormat();
 
 protected:
-    virtual String implPresent(VertexSP v) const;
+    virtual String implPresent(VertexSP v, EdgeSPV in, EdgeSPV out) const;
 
 private:
     String css() const;

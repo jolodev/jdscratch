@@ -11,7 +11,7 @@ AbstractFormatDialect::~AbstractFormatDialect()
 
 }
 
-String AbstractFormatDialect::present(VertexSP v) const
+String AbstractFormatDialect::present(VertexSP v, EdgeSPV in, EdgeSPV out) const
 {
-    return implPresent(v);
+    return implPresent(v, in, out)   ;
 }

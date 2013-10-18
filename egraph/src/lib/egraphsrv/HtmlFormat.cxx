@@ -18,8 +18,11 @@ HtmlFormat::~HtmlFormat()
 
 }
 
-String HtmlFormat::implPresent(VertexSP v) const
+String HtmlFormat::implPresent(VertexSP v, EdgeSPV in, EdgeSPV out) const
 {
+    (void) in;
+    (void) out;
+
     StringStream s;
     s << "<html>" << std::endl;
     s << "<head>" << std::endl;
@@ -37,9 +40,9 @@ String HtmlFormat::implPresent(VertexSP v) const
     s << "<h2>Properties</h2>" << std::endl;
     s << createPropertyTable(v);
     s << "<h2>Outbound Edges</h2>" << std::endl;
-    s << createEdgesTable(v->graph()->edges(v, EdgeDirections::Out));
+    s << createEdgesTable(out);
     s << "<h2>Inbound Edges</h2>" << std::endl;
-    s << createEdgesTable(v->graph()->edges(v, EdgeDirections::In));
+    s << createEdgesTable(in);
     s << "</body>" << std::endl;
     s << "</html>" << std::endl;
 

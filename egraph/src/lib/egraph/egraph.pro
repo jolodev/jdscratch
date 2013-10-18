@@ -1,8 +1,15 @@
-include(../../../config.pri)
+include($$PWD/../../../config.pri)
 
-TEMPLATE = lib
-TARGET = egraph
-DESTDIR = ../../../build/lib
+QT              -= core gui
+
+CONFIG          += console
+CONFIG          -= app_bundle
+CONFIG          -= qt
+
+TEMPLATE        = lib
+TARGET          = egraph
+DESTDIR         = ../../../build/lib
+
 unix:!macx: LIBS += -lboost_serialization
 
 SOURCES += \

@@ -1,6 +1,6 @@
 #include <egraph/Graph.hxx>
 #include <egraph/Storage.hxx>
-#include <egraphsrv/Server.hxx>
+#include <egraphsrv/Formater.hxx>
 #include <egraphsrv/HtmlFormat.hxx>
 
 #include <Config.hxx>
@@ -11,7 +11,6 @@ using namespace Config;
 int main()
 {
     auto g = boost::make_shared<Graph>(Graph("graph.xml"));
-    auto srv = boost::make_shared<Server<HtmlFormat> >(Server<HtmlFormat>(g));
 
     g->registerEdgeRole(RoleTypes::Contains);
     g->registerEdgeRole(RoleTypes::IsPartOf);
@@ -48,7 +47,13 @@ int main()
     g2->removeVertex(boneFossil2);
     g2->debug();
 */
-    std::cout << srv->present(model) << std::endl;
+    //std::cout << srv->present(model) << std::endl;
+
+    auto formater = Formater<HtmlFormat>();
+
+    std::cout << std::endl << formater.present(model,
+                                               g->edges(model, EdgeDirections::In),
+                                               g->edges(model, EdgeDirections::Out)) << std::endl;
 
     return EXIT_SUCCESS;
 }

@@ -13,10 +13,10 @@ public:
     explicit AbstractFormatDialect();
     virtual ~AbstractFormatDialect();
 
-    String present(VertexSP v) const;
+    String present(VertexSP v, EdgeSPV in, EdgeSPV out) const;
 
 protected:
-    virtual String implPresent(VertexSP v) const = 0;
+    virtual String implPresent(VertexSP v, EdgeSPV in, EdgeSPV out) const = 0;
 };
 }
 

@@ -1,2 +1,4 @@
 TEMPLATE = subdirs
-SUBDIRS += egraphtest
+SUBDIRS += egraphgui
+#egraphtest
+
